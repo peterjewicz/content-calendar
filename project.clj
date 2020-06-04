@@ -19,6 +19,8 @@
                  [metosin/reitit "0.3.7"]
                  [pez/clerk "1.0.0"]
                  [mount "0.1.16"]
+                 [toucan "1.15.1"]
+                 [mysql/mysql-connector-java "6.0.5"]
                  [nilenso/wscljs "0.2.0"]]
 
   :plugins [[lein-figwheel "0.5.20"]
