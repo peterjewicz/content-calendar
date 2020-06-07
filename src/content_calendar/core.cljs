@@ -2,7 +2,8 @@
     (:require
               [reagent.core :as reagent :refer [atom]]
               [reagent.dom :as rd]
-              [wscljs.client :as ws]))
+              [wscljs.client :as ws]
+              [wscljs.format :as fmt]))
 
 (enable-console-print!)
 
@@ -30,10 +31,17 @@
   (def socket (ws/create "ws://localhost:8080" handlers))
 )
 
+(defn send-message [type value]
+  (ws/send socket {:type type :value value} fmt/json))
+
+(def test-project {:name "tester" :description "a test projct" :ownerId 1 :startTime "2020-01-20"})
+
+
 (defn hello-world []
+  (setup-ws)
   [:div
    [:h1 (:text @app-state)]
-   [:button {:on-click #(setup-ws)} "Connect"]]
+   [:button {:on-click #(send-message "create-project" test-project)} "send msg"]]
 )
 
 (rd/render [hello-world]

@@ -3,6 +3,7 @@
              [toucan.models :refer [defmodel]]))
 
 (defmodel Content :content)
+(defmodel Projects :projects)
 
 (def mysql-db {
   :classname   "org.mysql.Driver"
@@ -15,5 +16,8 @@
 (db/set-default-db-connection! mysql-db)
 (db/set-default-quoting-style! :mysql)
 
-(defn test-db []
-  (println (db/select Content)))
+; (defn test-db []
+;   (println (db/select Content)))
+
+(defn create-project [project-map]
+  (db/insert! Projects project-map))
