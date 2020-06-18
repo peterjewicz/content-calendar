@@ -2,9 +2,7 @@
   (:require
     [immutant.web.async       :as async]
     [cheshire.core            :refer :all]
-    [content-calendar.server.services.database :as db]
-    ; [story-planner.server.services.database :as DB]
-))
+    [content-calendar.server.services.database :as db]))
 
 
 
@@ -13,6 +11,12 @@
   (defmethod handle-websocket-message "create-project"
     [data]
     (async/send! (:channel data) (generate-string (db/create-project (:value data)))))
+  (defmethod handle-websocket-message "create-content"
+    [data]
+    (async/send! (:channel data) (generate-string (db/create-content (:value data)))))
+  (defmethod handle-websocket-message "create-platform"
+    [data]
+    (async/send! (:channel data) (generate-string (db/create-platform (:value data)))))
 
 
 
